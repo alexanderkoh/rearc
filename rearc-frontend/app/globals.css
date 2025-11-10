@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/* Terminal/AS/400 Theme Variables - Inspired by SRCL */
+:root {
+  /* Colors */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-gray-10: #f4f4f4;
+  --color-gray-20: #e0e0e0;
+  --color-gray-30: #c6c6c6;
+  --color-gray-40: #a8a8a8;
+  --color-gray-60: #6f6f6f;
+  --color-gray-70: #525252;
+  --color-gray-80: #393939;
+  --color-gray-90: #262626;
+  
+  /* Terminal Theme Colors */
+  --theme-background: var(--color-black);
+  --theme-background-modal: var(--color-gray-90);
+  --theme-background-input: var(--color-gray-80);
+  --theme-border: var(--color-gray-70);
+  --theme-border-subdued: rgba(82, 82, 82, 0.3);
+  --theme-text: var(--color-white);
+  --theme-button: var(--color-white);
+  --theme-button-text: var(--color-black);
+  --theme-button-background: var(--color-gray-80);
+  --theme-focused-foreground: #ff6c04;
+  --theme-focused-foreground-subdued: rgba(255, 108, 4, 0.5);
+  
+  /* Font */
+  --font-family-mono: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+  --font-size: 16px;
+  --line-height-base: 1.25;
+}
+
+@theme inline {
+  --color-background: var(--theme-background);
+  --color-foreground: var(--theme-text);
+  --font-mono: var(--font-family-mono);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  }
+
+html,
+body {
+  background: var(--theme-background);
+  color: var(--theme-text);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  line-height: calc(var(--line-height-base) * 1rem);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums lining-nums;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Terminal-style scrollbar */
+::-webkit-scrollbar {
+  background: transparent;
+  height: calc(var(--line-height-base) * 1rem);
+  width: 1ch;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--theme-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-border-subdued);
+}
+
+/* Terminal borders */
+.terminal-border {
+  border: 1px solid var(--theme-border);
+}
+
+.terminal-border-subdued {
+  border: 1px solid var(--theme-border-subdued);
+}
+
+/* Terminal input styling */
+.terminal-input {
+  background: var(--theme-background-input);
+  border: 1px solid var(--theme-border);
+  color: var(--theme-text);
+  font-family: var(--font-family-mono);
+  padding: 0.5rem 0.75rem;
+}
+
+.terminal-input:focus {
+  outline: none;
+  border-color: var(--theme-focused-foreground);
+  background: var(--theme-background);
+}
+
+/* Terminal button styling */
+.terminal-button {
+  background: var(--theme-button-background);
+  border: 1px solid var(--theme-border);
+  color: var(--theme-text);
+  font-family: var(--font-family-mono);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.terminal-button:hover {
+  background: var(--theme-button);
+  color: var(--theme-button-text);
+}
+
+.terminal-button:active {
+  background: var(--theme-border);
+}
+
+.terminal-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Terminal output display */
+.terminal-output {
+  background: var(--theme-background);
+  border: 1px solid var(--theme-border);
+  color: var(--theme-text);
+  font-family: var(--font-family-mono);
+  padding: 0.75rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Terminal grid layout */
+.terminal-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Command prompt style */
+.command-prompt::before {
+  content: "> ";
+  color: var(--theme-focused-foreground);
+}
+
+/* Terminal cursor animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.terminal-cursor {
+  animation: blink 1s infinite;
+}
